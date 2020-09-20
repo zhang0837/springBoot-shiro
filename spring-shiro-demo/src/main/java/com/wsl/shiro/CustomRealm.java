@@ -19,6 +19,13 @@ public class CustomRealm extends AuthorizingRealm {
     @Autowired
     private LoginService loginService;
 
+    /**
+     * @MethodName doGetAuthorizationInfo
+     * @Description 权限配置类
+     * @Param [principalCollection]
+     * @Return AuthorizationInfo
+     * @Author WangShiLin
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取登录用户名
@@ -38,6 +45,13 @@ public class CustomRealm extends AuthorizingRealm {
         return simpleAuthorizationInfo;
     }
 
+    /**
+     * @MethodName doGetAuthenticationInfo
+     * @Description 认证配置类
+     * @Param [authenticationToken]
+     * @Return AuthenticationInfo
+     * @Author WangShiLin
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         //加这一步的目的是在Post请求的时候会先进认证，然后在到请求
