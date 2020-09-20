@@ -13,6 +13,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 public class CustomRealm extends AuthorizingRealm {
 
@@ -54,8 +55,7 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        //加这一步的目的是在Post请求的时候会先进认证，然后在到请求
-        if (authenticationToken.getPrincipal() == null) {
+        if (StringUtils.isEmpty(authenticationToken.getPrincipal())) {
             return null;
         }
         //获取用户信息

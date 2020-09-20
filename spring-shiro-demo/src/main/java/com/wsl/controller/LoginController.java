@@ -10,15 +10,19 @@ import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
 public class LoginController {
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login(User user) {
+        if (StringUtils.isEmpty(user.getUserName()) || StringUtils.isEmpty(user.getPassword())) {
+            return "请输入用户名和密码！";
+        }
         //用户认证信息
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
@@ -44,19 +48,19 @@ public class LoginController {
     }
 
     @RequiresRoles("admin")
-    @RequestMapping("/admin")
+    @GetMapping("/admin")
     public String admin() {
         return "admin success!";
     }
 
     @RequiresPermissions("query")
-    @RequestMapping("/index")
+    @GetMapping("/index")
     public String index() {
         return "index success!";
     }
 
     @RequiresPermissions("add")
-    @RequestMapping("/add")
+    @GetMapping("/add")
     public String add() {
         return "add success!";
     }
