@@ -22,8 +22,8 @@ public class LoginServiceImpl implements LoginService {
     /**
      * 模拟数据库查询
      *
-     * @param userName
-     * @return
+     * @param userName 用户名
+     * @return User
      */
     private User getMapByName(String userName) {
         Permissions permissions1 = new Permissions("1", "query");
@@ -37,7 +37,6 @@ public class LoginServiceImpl implements LoginService {
         User user = new User("1", "wsl", "123456", roleSet);
         Map<String, User> map = new HashMap<>();
         map.put(user.getUserName(), user);
-
 
         Set<Permissions> permissionsSet1 = new HashSet<>();
         permissionsSet1.add(permissions1);
