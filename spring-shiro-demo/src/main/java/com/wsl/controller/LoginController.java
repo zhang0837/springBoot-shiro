@@ -23,7 +23,7 @@ public class LoginController {
         if (StringUtils.isEmpty(user.getUserName()) || StringUtils.isEmpty(user.getPassword())) {
             return "请输入用户名和密码！";
         }
-        //用户认证信息
+        //用户认证信息,生成身份令牌Token
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
                 user.getUserName(),

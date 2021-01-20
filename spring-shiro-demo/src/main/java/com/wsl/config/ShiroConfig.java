@@ -9,8 +9,8 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
@@ -43,15 +43,15 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        Map<String, String> map = new HashMap<>();
-        //登出
-        map.put("/logout", "logout");
-        //对所有用户认证
-        map.put("/**", "authc");
         //登录
         shiroFilterFactoryBean.setLoginUrl("/login");
         //首页
         shiroFilterFactoryBean.setSuccessUrl("/index");
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
+        //登出
+        map.put("/logout", "logout");
+        //对所有用户认证
+        map.put("/**", "authc");
         //错误页面，认证不通过跳转
         shiroFilterFactoryBean.setUnauthorizedUrl("/error");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
